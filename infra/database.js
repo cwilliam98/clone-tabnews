@@ -7,20 +7,13 @@ function getClient() {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
+    ssl: process.env.NODE_ENV === "development" ? false : true,
   });
   return client;
 }
 
 async function query(queryObject) {
   const client = getClient();
-
-  console.log("Credencias do Postgress:", {
-    host: process.env.POSTGRES_HOST,
-    port: process.env.POSTGRES_PORT,
-    user: process.env.POSTGRES_USER,
-    database: process.env.POSTGRES_DB,
-    password: process.env.POSTGRES_PASSWORD,
-  });
 
   try {
     await client.connect();
